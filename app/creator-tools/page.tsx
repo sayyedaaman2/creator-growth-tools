@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     description:
       "Discover the best tools for content creators — video, design, scheduling and monetisation.",
     url: "/creator-tools/",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Creator Tools",
+      },
+    ],
   },
   twitter: {
     title: "Creator Tools",

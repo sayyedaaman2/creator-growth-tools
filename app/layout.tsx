@@ -52,6 +52,14 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     url: "/",
     locale: "en_US",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
   },
 
   twitter: {

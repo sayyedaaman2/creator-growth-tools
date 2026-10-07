@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     description:
       "Tools and software reviews for small online businesses — e-commerce, invoicing, project management.",
     url: "/small-business-tools/",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Small Business Tools",
+      },
+    ],
   },
   twitter: {
     title: "Small Business Tools",

@@ -82,6 +82,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       publishedTime: frontmatter.date,
       modifiedTime: frontmatter.updated || frontmatter.date,
       authors: [frontmatter.author],
+      images: [
+        {
+          url: frontmatter.featuredImage || "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: frontmatter.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",

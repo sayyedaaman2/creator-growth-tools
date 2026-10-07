@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     description:
       "Practical tools, guides and comparisons for creators, freelancers and small online businesses.",
     url: "/",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Creator Growth Tools",
+      },
+    ],
   },
   twitter: {
     title: "Creator Growth Tools – Tools & Guides for Creators and Freelancers",

@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     description:
       "The best AI tools for creators and small businesses. Writing, images, automation — reviewed honestly.",
     url: "/ai-tools/",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "AI Tools for Business",
+      },
+    ],
   },
   twitter: {
     title: "AI Tools for Business",

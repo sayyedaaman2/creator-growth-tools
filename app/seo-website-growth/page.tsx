@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     description:
       "Practical SEO tools and guides for creators and small businesses. Grow organic traffic without guesswork.",
     url: "/seo-website-growth/",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SEO & Website Growth",
+      },
+    ],
   },
   twitter: {
     title: "SEO & Website Growth",

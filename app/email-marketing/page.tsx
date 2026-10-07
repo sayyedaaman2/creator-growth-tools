@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     description:
       "Compare the best email marketing platforms for creators and small businesses.",
     url: "/email-marketing/",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Email Marketing Tools",
+      },
+    ],
   },
 };
 
