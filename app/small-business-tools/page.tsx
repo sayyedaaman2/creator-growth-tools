@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CategoryView } from "@/components/category-view";
+import { getOtherCategories } from "@/lib/categories";
 
 export const metadata: Metadata = {
   title: "Small Business Tools",
@@ -29,29 +30,6 @@ export const metadata: Metadata = {
   },
 };
 
-const otherCategories = [
-  {
-    title: "Email Marketing",
-    href: "/email-marketing",
-    description: "Newsletter platforms and subscriber automation.",
-  },
-  {
-    title: "Creator Tools",
-    href: "/creator-tools",
-    description: "Platforms and software for digital content creators.",
-  },
-  {
-    title: "SEO & Website Growth",
-    href: "/seo-website-growth",
-    description: "Search engine optimization strategies & site tools.",
-  },
-  {
-    title: "AI Tools",
-    href: "/ai-tools",
-    description: "Artificial intelligence software for productivity.",
-  },
-];
-
 export default function SmallBusinessToolsPage() {
   return (
     <CategoryView
@@ -65,7 +43,7 @@ export default function SmallBusinessToolsPage() {
         "Contract signing and proposal software breakdowns.",
         "Operational efficiency recommendations tailored to lean service businesses.",
       ]}
-      otherCategories={otherCategories}
+      otherCategories={getOtherCategories("/small-business-tools")}
     />
   );
 }

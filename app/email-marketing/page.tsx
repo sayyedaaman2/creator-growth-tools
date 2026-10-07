@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CategoryView } from "@/components/category-view";
+import { getOtherCategories } from "@/lib/categories";
 
 export const metadata: Metadata = {
   title: "Email Marketing Tools",
@@ -24,29 +25,6 @@ export const metadata: Metadata = {
   },
 };
 
-const otherCategories = [
-  {
-    title: "Creator Tools",
-    href: "/creator-tools",
-    description: "Platforms and software for digital content creators.",
-  },
-  {
-    title: "Small Business Tools",
-    href: "/small-business-tools",
-    description: "Operational software for client management & invoicing.",
-  },
-  {
-    title: "SEO & Website Growth",
-    href: "/seo-website-growth",
-    description: "Search engine optimization strategies & site tools.",
-  },
-  {
-    title: "AI Tools",
-    href: "/ai-tools",
-    description: "Artificial intelligence software for productivity.",
-  },
-];
-
 export default function EmailMarketingPage() {
   return (
     <CategoryView
@@ -60,7 +38,7 @@ export default function EmailMarketingPage() {
         "Cost breakdown analysis comparing subscriber-based pricing models.",
         "Guidance on choosing between lightweight newsletter tools and comprehensive marketing suites.",
       ]}
-      otherCategories={otherCategories}
+      otherCategories={getOtherCategories("/email-marketing")}
     />
   );
 }

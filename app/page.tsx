@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllArticles } from "@/lib/articles";
+import { CATEGORIES } from "@/lib/categories";
 
 export const metadata: Metadata = {
   title: {
@@ -32,38 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-const categories = [
-  {
-    title: "Email Marketing",
-    href: "/email-marketing",
-    description:
-      "Newsletter platforms, email automation, and subscriber growth tools compared for creators and businesses.",
-  },
-  {
-    title: "Creator Tools",
-    href: "/creator-tools",
-    description:
-      "Essential software, content creation platforms, and digital product tools built for creators.",
-  },
-  {
-    title: "Small Business Tools",
-    href: "/small-business-tools",
-    description:
-      "Practical solutions for client management, invoicing, project tracking, and operational efficiency.",
-  },
-  {
-    title: "SEO & Website Growth",
-    href: "/seo-website-growth",
-    description:
-      "Search engine optimization strategies, technical advice, and website tools to drive organic traffic.",
-  },
-  {
-    title: "AI Tools",
-    href: "/ai-tools",
-    description:
-      "Evaluations of artificial intelligence software for writing, workflow automation, and content production.",
-  },
-];
+
 
 export default function HomePage() {
   // Fetch only published production articles (excludes test/draft articles)
@@ -107,7 +77,7 @@ export default function HomePage() {
         </div>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((category) => (
+          {CATEGORIES.map((category) => (
             <Link
               key={category.href}
               href={category.href}
@@ -115,7 +85,7 @@ export default function HomePage() {
             >
               <div>
                 <h3 className="text-lg font-bold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
-                  {category.title}
+                  {category.name}
                 </h3>
                 <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
                   {category.description}

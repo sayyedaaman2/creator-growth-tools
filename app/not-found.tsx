@@ -1,14 +1,9 @@
 import Link from "next/link";
+import { getNavCategories } from "@/lib/categories";
 
 export const dynamic = "force-static";
 
-const categories = [
-  { name: "Email Marketing", href: "/email-marketing" },
-  { name: "Creator Tools", href: "/creator-tools" },
-  { name: "Small Business Tools", href: "/small-business-tools" },
-  { name: "SEO & Website Growth", href: "/seo-website-growth" },
-  { name: "AI Tools", href: "/ai-tools" },
-];
+const categories = getNavCategories();
 
 export default function NotFound() {
   return (

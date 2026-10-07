@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CategoryView } from "@/components/category-view";
+import { getOtherCategories } from "@/lib/categories";
 
 export const metadata: Metadata = {
   title: "SEO & Website Growth",
@@ -29,29 +30,6 @@ export const metadata: Metadata = {
   },
 };
 
-const otherCategories = [
-  {
-    title: "Email Marketing",
-    href: "/email-marketing",
-    description: "Newsletter platforms and subscriber automation.",
-  },
-  {
-    title: "Creator Tools",
-    href: "/creator-tools",
-    description: "Platforms and software for digital content creators.",
-  },
-  {
-    title: "Small Business Tools",
-    href: "/small-business-tools",
-    description: "Operational software for client management & invoicing.",
-  },
-  {
-    title: "AI Tools",
-    href: "/ai-tools",
-    description: "Artificial intelligence software for productivity.",
-  },
-];
-
 export default function SeoWebsiteGrowthPage() {
   return (
     <CategoryView
@@ -65,7 +43,7 @@ export default function SeoWebsiteGrowthPage() {
         "Website performance & Core Web Vitals optimization techniques.",
         "On-page optimization strategies for long-form content and product pages.",
       ]}
-      otherCategories={otherCategories}
+      otherCategories={getOtherCategories("/seo-website-growth")}
     />
   );
 }
