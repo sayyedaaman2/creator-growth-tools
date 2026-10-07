@@ -1,12 +1,44 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { getArticleBySlug, getAllArticleSlugs } from "@/lib/articles";
 import { siteConfig } from "@/lib/site-config";
 import { ArticleJsonLd } from "@/components/article-json-ld";
 
 // Enforce static generation for static export
 export const dynamicParams = false;
+
+interface MDXLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  href?: string;
+}
+
+function MDXLink({ href, children, ...props }: MDXLinkProps) {
+  if (!href) {
+    return <a {...props}>{children}</a>;
+  }
+
+  const isInternalLink = href.startsWith("/") && !href.startsWith("//");
+
+  if (isInternalLink) {
+    return (
+      <Link href={href} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  );
+}
+
+const mdxComponents = {
+  a: MDXLink,
+};
 
 interface PageProps {
   params: Promise<{
@@ -111,7 +143,15 @@ export default async function ArticlePage({ params }: PageProps) {
           </header>
 
           <div className="mt-6 space-y-4 text-zinc-800 dark:text-zinc-200">
-            <MDXRemote source={content} />
+            <MDXRemote
+              source={content}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm],
+                },
+              }}
+              components={mdxComponents}
+            />
           </div>
         </article>
       </div>
