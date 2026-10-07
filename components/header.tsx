@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,22 +15,69 @@ const navItems = [
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const prevIsOpenRef = useRef(isOpen);
 
   // Close mobile menu automatically on route change
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // Close mobile menu on Escape key
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  // Return focus to trigger button when menu closes
+  useEffect(() => {
+    if (prevIsOpenRef.current && !isOpen) {
+      triggerRef.current?.focus();
+    }
+    prevIsOpenRef.current = isOpen;
+  }, [isOpen]);
+
+  // Keyboard navigation: Escape key to close & Focus trap within open menu
+  useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsOpen(false);
+        return;
+      }
+
+      if (e.key === "Tab" && menuRef.current) {
+        const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement || document.activeElement === triggerRef.current) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            triggerRef.current?.focus();
+          }
+        }
       }
     };
-    if (isOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
+
+    window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
@@ -68,6 +115,7 @@ export function Header() {
         {/* Mobile Menu Toggle Button */}
         <div className="flex lg:hidden">
           <button
+            ref={triggerRef}
             type="button"
             onClick={() => setIsOpen(!isOpen)}
             aria-expanded={isOpen}
@@ -88,28 +136,42 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Backdrop & Navigation Menu */}
       {isOpen && (
-        <div id="mobile-navigation" className="border-t border-zinc-200 bg-white px-4 pt-2 pb-4 dark:border-zinc-800 dark:bg-zinc-950 lg:hidden">
-          <nav aria-label="Mobile Navigation" className="flex flex-col gap-y-2">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href || pathname === `${item.href}/`;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`rounded-md px-3 py-2 text-base font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-white ${
-                    isActive
-                      ? "bg-zinc-100 font-semibold text-zinc-900 dark:bg-zinc-900 dark:text-white"
-                      : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
+        <>
+          <div
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+            className="fixed inset-0 top-[57px] z-30 bg-zinc-950/50 dark:bg-zinc-950/70 lg:hidden"
+          />
+          <div
+            id="mobile-navigation"
+            ref={menuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation"
+            className="relative z-40 border-t border-zinc-200 bg-white px-4 pt-2 pb-4 dark:border-zinc-800 dark:bg-zinc-950 lg:hidden"
+          >
+            <nav aria-label="Mobile Navigation" className="flex flex-col gap-y-2">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href || pathname === `${item.href}/`;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`rounded-md px-3 py-2 text-base font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-white ${
+                      isActive
+                        ? "bg-zinc-100 font-semibold text-zinc-900 dark:bg-zinc-900 dark:text-white"
+                        : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );
