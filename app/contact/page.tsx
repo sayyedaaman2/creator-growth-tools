@@ -23,10 +23,10 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main>
+    <div>
       <h1>Contact</h1>
       <p>Coming soon.</p>
-    </main>
+    </div>
   );
 }
 

@@ -30,10 +30,10 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main>
+    <div>
       <h1>About</h1>
       <p>Coming soon.</p>
-    </main>
+    </div>
   );
 }
 

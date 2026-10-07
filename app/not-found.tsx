@@ -12,7 +12,7 @@ const categories = [
 
 export default function NotFound() {
   return (
-    <main className="mx-auto flex max-w-4xl flex-col items-center justify-center px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8">
+    <div className="mx-auto flex max-w-4xl flex-col items-center justify-center px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8">
       <div className="rounded-full bg-zinc-100 px-3.5 py-1 text-xs font-semibold text-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
         404 Error
       </div>
@@ -48,6 +48,6 @@ export default function NotFound() {
           ))}
         </div>
       </div>
-    </main>
+    </div>
   );
 }

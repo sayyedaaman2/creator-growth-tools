@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main>
+    <div>
       <h1>Terms of Use</h1>
       <p>Coming soon.</p>
-    </main>
+    </div>
   );
 }
 

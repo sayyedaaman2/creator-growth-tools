@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 
 export default function AffiliateDisclosurePage() {
   return (
-    <main>
+    <div>
       <h1>Affiliate Disclosure</h1>
       <p>Coming soon.</p>
-    </main>
+    </div>
   );
 }
 
