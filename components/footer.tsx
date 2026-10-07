@@ -48,7 +48,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="mt-8 border-t border-zinc-200 pt-4 dark:border-zinc-800 text-center md:text-left">
-          <p className="text-xs text-zinc-500 dark:text-zinc-500">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
             &copy; {currentYear} Creator Growth Tools. All rights reserved.
           </p>
         </div>
