@@ -93,6 +93,16 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        <meta
+          name="impact-site-verification"
+          content="71eadab8-96f4-42df-baed-6ebdb6371f73"
+        />
+        <meta
+          {...({
+            name: "impact-site-verification",
+            value: "71eadab8-96f4-42df-baed-6ebdb6371f73",
+          } as React.HTMLAttributes<HTMLMetaElement>)}
+        />
         <WebsiteJsonLd />
       </head>
       <body className="min-h-full flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
